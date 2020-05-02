@@ -1,0 +1,16 @@
+[package]
+name = "mmv"
+version = "0.1.0"
+authors = ["Dustin Frisch <fooker@lab.sh>"]
+edition = "2018"
+
+[dependencies]
+clap = "2"
+exitcode = "1.1"
+anyhow = "1"
+thiserror = "1"
+walkdir = "2"
+tempfile = "3"
+reflink = "0.1"
+itertools = "0.9"
+yansi = "0.5"

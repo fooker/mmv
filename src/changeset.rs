@@ -5,7 +5,6 @@ use std::io::Write;
 
 use anyhow::Result;
 use std::collections::BTreeMap;
-use std::iter::FromIterator;
 
 #[derive(Debug, Clone)]
 pub enum Action {
@@ -84,23 +83,6 @@ impl ChangeSet {
         return (self.workspace, self.records);
     }
 }
-
-impl IntoIterator for ChangeSet {
-    type Item = (PathBuf, Action);
-    type IntoIter = impl Iterator<Item=Self::Item>;
-
-    fn into_iter(self) -> Self::IntoIter {
-        return self.records.into_iter();
-    }
-}
-
-// impl FromIterator<(PathBuf, Action)> for ChangeSet {
-//     fn from_iter<T: IntoIterator<Item=(PathBuf, Action)>>(iter: T) -> Self {
-//         return ChangeSet {
-//             records: iter.into_iter().collect(),
-//         };
-//     }
-// }
 
 #[derive(Debug, Clone)]
 pub struct ChangeSetImport {

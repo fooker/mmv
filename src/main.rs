@@ -1,6 +1,3 @@
-#![feature(never_type)]
-#![feature(type_alias_impl_trait)]
-
 use std::path::{Path, PathBuf};
 
 use clap::{App, AppSettings, Arg, ArgMatches, SubCommand};
@@ -208,7 +205,7 @@ fn execute(workingdir: &Path, matches: &ArgMatches) -> Result<(), ProgramError> 
     return Ok(());
 }
 
-fn main() -> Result<!, anyhow::Error> {
+fn main() -> Result<(), anyhow::Error> {
     let matches = App::new("mmv")
         .about("Mass Move files with interactive renaming")
         .version(env!("CARGO_PKG_VERSION"))

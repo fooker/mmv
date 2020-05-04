@@ -245,16 +245,16 @@ fn main() -> Result<(), anyhow::Error> {
                 .required(true)))
         .get_matches();
 
-    let source = matches.value_of("source")
+    let workspace = matches.value_of("source")
         .map(PathBuf::from)
-        .unwrap_or_else(PathBuf::new);
+        .unwrap_or_else(|| std::env::current_dir().expect("No current path"));
 
     let result = match matches.subcommand() {
-        ("init", Some(matches)) => init(&source, matches),
-        ("update", Some(matches)) => update(&source, matches),
-        ("status", Some(matches)) => status(&source, matches),
-        ("edit", Some(matches)) => edit(&source, matches),
-        ("execute", Some(matches)) => execute(&source, matches),
+        ("init", Some(matches)) => init(&workspace, matches),
+        ("update", Some(matches)) => update(&workspace, matches),
+        ("status", Some(matches)) => status(&workspace, matches),
+        ("edit", Some(matches)) => edit(&workspace, matches),
+        ("execute", Some(matches)) => execute(&workspace, matches),
         _ => unreachable!()
     };
 

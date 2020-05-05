@@ -178,14 +178,18 @@ impl Workspace {
     pub fn open(path: impl AsRef<Path>) -> Option<Self> {
         let workspace = Self::at(path);
 
-        let sources = workspace.sources_path();
-        let targets = workspace.targets_path();
-
-        if sources.is_file() && targets.is_file() {
+        if workspace.is_initialized() {
             return Some(workspace);
         } else {
             return None;
         }
+    }
+
+    pub fn is_initialized(&self) -> bool {
+        let sources = self.sources_path();
+        let targets = self.targets_path();
+
+        return sources.is_file() && targets.is_file();
     }
 
     pub fn import(self) -> Result<ChangeSetImport> {
